@@ -11,12 +11,12 @@ import os
 import argparse
 
 parser = argparse.ArgumentParser()
-parser.add_argument("stacked_blocks.stacks", help = "stacked blocks file, with proper headers")
-parser.add_argument("tandem_alignment.sam", help = "reads aligned to tandem duplication of the reference in SAM format")
+parser.add_argument("stacked_blocks", help = "stacked blocks file, with proper headers (.stacks)")
+parser.add_argument("tandem_alignment", help = "reads aligned to tandem duplication of the reference in SAM format (.sam)")
 args = parser.parse_args()
 
-labeled_file = open(args.manual_alignment.man, 'r')
-sam_file = open(args.sam_alignment.sam, 'r')
+labeled_file = open(args.stacked_blocks, 'r')
+sam_file = open(args.tandem_alignment, 'r')
 
 MIN_SEGMENT_LENGTH = 0
 REPEAT_LEN = 0
@@ -57,6 +57,7 @@ for line in labeled_file.readlines():
             consensus_sam_file = open(fpath, "r")
         except:
             print("[error] Could not open consensus sam file: ", fpath)
+            exit()
         seq = "@"
         while(seq[0] == "@"):
             seq = consensus_sam_file.readline().strip()
@@ -185,7 +186,7 @@ for line in sam_file.readlines():
         continue
 
     arr = line.strip().split('\t')
-    read = arr[0].strip().replace("_","")
+    read = arr[0].strip()
     position = int(arr[3])
 
     contig, shift = "", 0
@@ -208,8 +209,11 @@ for line in sam_file.readlines():
         else:
             unadjusted += 1 
 
-    arr[3] = str(new_pos)
-    if(contig != "unused"):
+        if(new_pos < 0):
+            print("[warning] mapping position of read ", read, " is negative, ignoring this read")
+            continue
+        arr[3] = str(new_pos)
+
         o_sam_files[contig].write('\t'.join(arr) + '\n')
 
 print("[report] total " + str(unused) + " unused reads")
@@ -241,7 +245,6 @@ for consensus in consensus_insertions:
             depth_count = 0
             for i in range (depth):
 
-                ### finish this part
                 arr = consensus_SAMs[consensus].copy()
                 depth_count += 1
 
@@ -254,10 +257,10 @@ for consensus in consensus_insertions:
 
                 o_sam_files[contig].write('\t'.join(arr) + '\n')
 
-    print("wrote a total of ", seg_count, "alignments for consensus ", consensus)
+    print("[output] wrote a total of ", seg_count, "alignments for consensus ", consensus)
 
 
-print("[output] done writing SAM file")
+print("[output] done writing SAM file(s)")
 
 if(len(contigs.keys()) > 0):
     print("[warning] these reads were in the stacked blocks but were not found in SAM file:")

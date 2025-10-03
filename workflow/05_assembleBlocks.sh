@@ -1,3 +1,11 @@
+# -------------------------------
+# 05_assembleBlocks.sh
+# tiger-paw
+# Peter Reifenstein
+# 
+# Use: combine all coverage files, and haplotype list for each read to create blocks
+# Reference: https://github.com/whiskersthecat/tiger-paw
+# -------------------------------
 
 MINIMUM_N_SEGMENTS=3
 MOST_SEGMENTS=25
@@ -15,7 +23,7 @@ for i in "${!args[@]}"; do
 done
 
 if (( sep_index < 0 )); then
-  echo "Usage: $0 dataset_name <list of blast coverage results .coverage> -- <list of combined haplotype files .combined>"
+  echo "Usage: $0 dataset_name <list of blast coverage results .coverage> -- <list of haplotype list files .haplotype.list.tab>"
   echo "E.g.: $0 short_1 <reference.vs....bed.coverage component1.vs....bed.coverage component2.vs....bed.coverage ...> -- <var1....combined var2....combined "
   exit 1
 fi
@@ -51,9 +59,9 @@ echo "[part 1] reformatting intermediate file with all coverages"
 # cp blocks/${dataset_name}.blocks blocks/${dataset_name}.blocks
 
 awk -v VAR="$dataset_abbrev" 'BEGIN {FS=OFS="\t"} {
-  printf ("%s\t%s\t%-7s\t", $1, VAR, $2); other = 1; fields = NF;
+  printf ("%s\t%s\t%-7s", $1, VAR, $2); other = 1; fields = NF;
   for(i = 3; i <= fields; i++) { other -= $i; if(i > 3) {if ($i > 0.001) {printf("\t%02.1i", $i * 100)} else {printf("\t--")};} };
-  if (other > 0.01) {printf("\t%02.1i", other * 100)} else {printf("\t--")}; 
+  if (other > 0.01) {printf("\t%02.1i\t", other * 100)} else {printf("\t--\t")}; 
   printf("\n")} ' blocks/${dataset_name}.blocks > blocks/${dataset_name}.blocks.tmp
 mv blocks/${dataset_name}.blocks.tmp blocks/${dataset_name}.blocks
 

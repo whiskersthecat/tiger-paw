@@ -1,3 +1,11 @@
+# -------------------------------
+# 05_blast2coverage.sh
+# tiger-paw
+# Peter Reifenstein, adopted from code from Alex Kozik (https://github.com/alex-kozik/Asm-Pipe-B3)
+# 
+# Use: convert blast hits to a fraction coverage across reads
+# Reference: https://github.com/whiskersthecat/tiger-paw
+# -------------------------------
 
 blast_file="$1"
 targets_fa="$2"
