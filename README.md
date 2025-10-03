@@ -25,7 +25,7 @@ Clone this repository.
 git clone whiskersthecat/tiger-paw
 ```
 
-Start with [step 0](workflow/00-introduction.md), which describes how to install the few software dependencies.
+Start with [WORKFLOW-00-INTRODUCTION](workflow/WORKFLOW-00-INTRODUCTION.md), which describes how to install the few software dependencies and the required input data.
 
 
 ## Overview
