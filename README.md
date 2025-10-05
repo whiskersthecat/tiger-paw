@@ -6,10 +6,12 @@ Workflow for very accurate closing, variant annotation, and analysis of gaps in 
 
 Used to assemble 10 MB (10 million base pairs) and 4 MB of the two Nucleolus Organizer Regions (ribosomal rRNA gene clusters) in [The Telomere to Telomere Gapless Lettuce (_lactuca sativa c. salinas_) Genome Assembly](https://kittishgames.com/pounce/).
 
+![example_assembly](assets/example_assembly.png)
+
 ## Background
 
-* In large tandem repeat clusters, variations distinguishing consecutive repeat segments is minimal and overshadowed by errors in sequencing reads, rendering the regions unresolveable by classical genome assembly algorithms such as *String Overlap Graphs* (Hifiasm) or *DeBrujin Graphs* (Verkko).
-* In many modern genome assemblies, these regions are left as gaps and filled with Ns or improperly scaffolded.
+* In large tandem repeat clusters, subtle biological sequence variants between consecutive repeat segments are obscured by sequencing errors, rendering consecutive segments virtually indistinguishable.
+* Modern genome assemblers like *Hifiasm* (string overlap graphs) or *Verkko* (Debrujin Graphs) cannot resolve these regions and leave gaps in the genome assembly.
 * Correctly resolving these regions is very difficult, but greatly improves contiguity of the genome assembly and gives tremendous insight into mechanisms of genome evolution.
 
 ## Notes
