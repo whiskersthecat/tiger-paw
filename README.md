@@ -4,7 +4,7 @@
 
 Workflow for very accurate assembly, variant annotation, and analysis of gaps in eukaryotic genome assemblies caused by very large tandem repeat clusters (e.g. hundreds of back-to-back duplications of a ~10,000 base pair gene).
 
-Used to assemble 10 MB (10 million base pairs) and 4 MB of the two Nucleolus Organizer Regions (ribosomal rRNA gene clusters) in [The Telomere to Telomere Gapless Lettuce (_lactuca sativa c. salinas_) Genome Assembly]([https://kittishgames.com/pounce/](https://www.ncbi.nlm.nih.gov/datasets/genome/GCA_002870075.5/)).
+Used to assemble 10 MB (10 million base pairs) and 4 MB of the two Nucleolus Organizer Regions (ribosomal rRNA gene clusters) in [The Telomere to Telomere Gapless Lettuce (_Lactuca sativa c. salinas_) Genome Assembly](https://www.ncbi.nlm.nih.gov/datasets/genome/GCA_002870075.5/).
 
 ## Background
 
